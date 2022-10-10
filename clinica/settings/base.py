@@ -1,7 +1,10 @@
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+STATICFILES_DIRS = (
+    os.path.join('static'),
+)
 
 SECRET_KEY = 'django-insecure-nz)3b30&wo3@ikl4fl0n*tj)o00l(*$ag!t$zae$h5b2^+3q7z'
 
@@ -16,6 +19,7 @@ INSTALLED_APPS = [
     'apps.access',
     'apps.citas',
     'apps.medico',
+    'apps.cliente',
 ]
 
 MIDDLEWARE = [
@@ -33,7 +37,7 @@ ROOT_URLCONF = 'clinica.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,3 +82,6 @@ USE_L10N = True
 USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/" 
