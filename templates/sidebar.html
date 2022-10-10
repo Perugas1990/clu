@@ -1,237 +1,152 @@
 {% load static %}
-    <aside id="sidebar" class="sidebar">
-    
-        <ul class="sidebar-nav" id="sidebar-nav">
-    
-            <li class="nav-item">
-                <a class="nav-link " href="index.html">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="components-alerts.html">
-                            <i class="bi bi-circle"></i><span>Alerts</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-accordion.html">
-                            <i class="bi bi-circle"></i><span>Accordion</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-badges.html">
-                            <i class="bi bi-circle"></i><span>Badges</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-breadcrumbs.html">
-                            <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-buttons.html">
-                            <i class="bi bi-circle"></i><span>Buttons</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-cards.html">
-                            <i class="bi bi-circle"></i><span>Cards</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-carousel.html">
-                            <i class="bi bi-circle"></i><span>Carousel</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-list-group.html">
-                            <i class="bi bi-circle"></i><span>List group</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-modal.html">
-                            <i class="bi bi-circle"></i><span>Modal</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-tabs.html">
-                            <i class="bi bi-circle"></i><span>Tabs</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-pagination.html">
-                            <i class="bi bi-circle"></i><span>Pagination</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-progress.html">
-                            <i class="bi bi-circle"></i><span>Progress</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-spinners.html">
-                            <i class="bi bi-circle"></i><span>Spinners</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-tooltips.html">
-                            <i class="bi bi-circle"></i><span>Tooltips</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Components Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="forms-elements.html">
-                            <i class="bi bi-circle"></i><span>Form Elements</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-layouts.html">
-                            <i class="bi bi-circle"></i><span>Form Layouts</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-editors.html">
-                            <i class="bi bi-circle"></i><span>Form Editors</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="forms-validation.html">
-                            <i class="bi bi-circle"></i><span>Form Validation</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Forms Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="tables-general.html">
-                            <i class="bi bi-circle"></i><span>General Tables</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tables-data.html">
-                            <i class="bi bi-circle"></i><span>Data Tables</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Tables Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="charts-chartjs.html">
-                            <i class="bi bi-circle"></i><span>Chart.js</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="charts-apexcharts.html">
-                            <i class="bi bi-circle"></i><span>ApexCharts</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="charts-echarts.html">
-                            <i class="bi bi-circle"></i><span>ECharts</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Charts Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="icons-bootstrap.html">
-                            <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="icons-remix.html">
-                            <i class="bi bi-circle"></i><span>Remix Icons</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="icons-boxicons.html">
-                            <i class="bi bi-circle"></i><span>Boxicons</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Icons Nav -->
-    
-            <li class="nav-heading">Pages</li>
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
-                    <i class="bi bi-person"></i>
-                    <span>Profile</span>
-                </a>
-            </li><!-- End Profile Page Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-faq.html">
-                    <i class="bi bi-question-circle"></i>
-                    <span>F.A.Q</span>
-                </a>
-            </li><!-- End F.A.Q Page Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-contact.html">
-                    <i class="bi bi-envelope"></i>
-                    <span>Contact</span>
-                </a>
-            </li><!-- End Contact Page Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-register.html">
-                    <i class="bi bi-card-list"></i>
-                    <span>Register</span>
-                </a>
-            </li><!-- End Register Page Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-login.html">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Login</span>
-                </a>
-            </li><!-- End Login Page Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-error-404.html">
-                    <i class="bi bi-dash-circle"></i>
-                    <span>Error 404</span>
-                </a>
-            </li><!-- End Error 404 Page Nav -->
-    
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-blank.html">
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Blank</span>
-                </a>
-            </li><!-- End Blank Page Nav -->
-    
-        </ul>
-    
-    </aside>
+    <div class="nk-sidebar">
+        <div class="nk-nav-scroll">
+            <ul class="metismenu" id="menu">
+                <li class="nav-label">Dashboard</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'index.html">Home 1</a></li>
+                        <!-- <li><a href="{% static 'index-2.html">Home 2</a></li> -->
+                    </ul>
+                </li>
+                <li class="mega-menu mega-menu-sm">
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'layout-blank.html">Blank</a></li>
+                        <li><a href="{% static 'layout-one-column.html">One Column</a></li>
+                        <li><a href="{% static 'layout-two-column.html">Two column</a></li>
+                        <li><a href="{% static 'layout-compact-nav.html">Compact Nav</a></li>
+                        <li><a href="{% static 'layout-vertical.html">Vertical</a></li>
+                        <li><a href="{% static 'layout-horizontal.html">Horizontal</a></li>
+                        <li><a href="{% static 'layout-boxed.html">Boxed</a></li>
+                        <li><a href="{% static 'layout-wide.html">Wide</a></li>
+
+
+                        <li><a href="{% static 'layout-fixed-header.html">Fixed Header</a></li>
+                        <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label">Apps</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'email-inbox.html">Inbox</a></li>
+                        <li><a href="{% static 'email-read.html">Read</a></li>
+                        <li><a href="{% static 'email-compose.html">Compose</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'app-profile.html">Profile</a></li>
+                        <li><a href="{% static 'app-calender.html">Calender</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'chart-flot.html">Flot</a></li>
+                        <li><a href="{% static 'chart-morris.html">Morris</a></li>
+                        <li><a href="{% static 'chart-chartjs.html">Chartjs</a></li>
+                        <li><a href="{% static 'chart-chartist.html">Chartist</a></li>
+                        <li><a href="{% static 'chart-sparkline.html">Sparkline</a></li>
+                        <li><a href="{% static 'chart-peity.html">Peity</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label">UI Components</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'ui-accordion.html">Accordion</a></li>
+                        <li><a href="{% static 'ui-alert.html">Alert</a></li>
+                        <li><a href="{% static 'ui-badge.html">Badge</a></li>
+                        <li><a href="{% static 'ui-button.html">Button</a></li>
+                        <li><a href="{% static 'ui-button-group.html">Button Group</a></li>
+                        <li><a href="{% static 'ui-cards.html">Cards</a></li>
+                        <li><a href="{% static 'ui-carousel.html">Carousel</a></li>
+                        <li><a href="{% static 'ui-dropdown.html">Dropdown</a></li>
+                        <li><a href="{% static 'ui-list-group.html">List Group</a></li>
+                        <li><a href="{% static 'ui-media-object.html">Media Object</a></li>
+                        <li><a href="{% static 'ui-modal.html">Modal</a></li>
+                        <li><a href="{% static 'ui-pagination.html">Pagination</a></li>
+                        <li><a href="{% static 'ui-popover.html">Popover</a></li>
+                        <li><a href="{% static 'ui-progressbar.html">Progressbar</a></li>
+                        <li><a href="{% static 'ui-tab.html">Tab</a></li>
+                        <li><a href="{% static 'ui-typography.html">Typography</a></li>
+                        <!-- </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
+                    </a>
+                    <ul aria-expanded="false"> -->
+                        <li><a href="{% static 'uc-nestedable.html">Nestedable</a></li>
+                        <li><a href="{% static 'uc-noui-slider.html">Noui Slider</a></li>
+                        <li><a href="{% static 'uc-sweetalert.html">Sweet Alert</a></li>
+                        <li><a href="{% static 'uc-toastr.html">Toastr</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="widgets.html" aria-expanded="false">
+                        <i class="icon-badge menu-icon"></i><span class="nav-text">Widget</span>
+                    </a>
+                </li>
+                <li class="nav-label">Forms</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'form-basic.html">Basic Form</a></li>
+                        <li><a href="{% static 'form-validation.html">Form Validation</a></li>
+                        <li><a href="{% static 'form-step.html">Step Form</a></li>
+                        <li><a href="{% static 'form-editor.html">Editor</a></li>
+                        <li><a href="{% static 'form-picker.html">Picker</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label">Table</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'table-basic.html" aria-expanded="false">Basic Table</a></li>
+                        <li><a href="{% static 'table-datatable.html" aria-expanded="false">Data Table</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label">Pages</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{% static 'page-login.html">Login</a></li>
+                        <li><a href="{% static 'page-register.html">Register</a></li>
+                        <li><a href="{% static 'page-lock.html">Lock Screen</a></li>
+                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                            <ul aria-expanded="false">
+                                <li><a href="{% static 'page-error-404.html">Error 404</a></li>
+                                <li><a href="{% static 'page-error-403.html">Error 403</a></li>
+                                <li><a href="{% static 'page-error-400.html">Error 400</a></li>
+                                <li><a href="{% static 'page-error-500.html">Error 500</a></li>
+                                <li><a href="{% static 'page-error-503.html">Error 503</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>

@@ -5,5 +5,7 @@ from django.views.generic import (
 
 # Create your views here.
 
-class citas_agregar_views(TemplateView):
-    template_name = 'home.html'
+def citas_agregar_views(request):
+    template_name = 'calendario.html'
+    context = {}
+    return render(request, template_name, context)

@@ -6,7 +6,7 @@ app_name = 'citas'
 urlpatterns = [
     path(
         'agregar/', 
-        citas_agregar_views.as_view(),
+        citas_agregar_views,
         name = 'agregar_citas'
     ),
 ]
