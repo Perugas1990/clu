@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="{% static 'plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css' %}">
     <!-- Custom Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-
+    {%block css_page%}
+    {%endblock%}
 </head>
 
 <body>
@@ -44,17 +45,7 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="{% static 'images/logo.png' %}" alt=""> </b>
-                    <span class="logo-compact"><img src="{% static 'images/logo-compact.png' %}" alt=""></span>
-                    <span class="brand-title">
-                        <img src="{% static 'images/logo-text.png' %}" alt="">
-                    </span>
-                </a>
-            </div>
-        </div>
+        {% include 'nav_header.html' %}
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -70,28 +61,25 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        
+        {% include 'sidebar.html' %}
         <!--**********************************
             Sidebar end
         ***********************************-->
-        {% include 'sidebar.html' %}
+
         <!--**********************************
             Content body start
         ***********************************-->
-        
+        {% block content-body %}
+        {% endblock %}
         <!--**********************************
             Content body end
         ***********************************-->
-        <div class="content-body">
-            {% block content-body %}
-            {% endblock %}
-        </div>
         
         
         <!--**********************************
             Footer start
         ***********************************-->
-        {% include 'sidebar.html' %}
+        {% include 'footer.html' %}
         <!--**********************************
             Footer end
         ***********************************-->
@@ -110,26 +98,31 @@
     <script src="{% static 'js/styleSwitcher.js' %}"></script>
 
     <!-- Chartjs -->
-    <script src="{% static 'plugins/chart.js/Chart.bundle.min.js' %}"></script>
+    <script src="{% static './plugins/chart.js/Chart.bundle.min.js' %}"></script>
     <!-- Circle progress -->
-    <script src="{% static 'plugins/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static './plugins/circle-progress/circle-progress.min.js' %}"></script>
     <!-- Datamap -->
-    <script src="{% static 'plugins/d3v3/index.js' %}"></script>
-    <script src="{% static 'plugins/topojson/topojson.min.js' %}"></script>
-    <script src="{% static 'plugins/datamaps/datamaps.world.min.js' %}"></script>
+    <script src="{% static './plugins/d3v3/index.js' %}"></script>
+    <script src="{% static './plugins/topojson/topojson.min.js' %}"></script>
+    <script src="{% static './plugins/datamaps/datamaps.world.min.js' %}"></script>
     <!-- Morrisjs -->
-    <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
-    <script src="{% static 'plugins/morris/morris.min.js' %}"></script>
+    <script src="{% static './plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static './plugins/morris/morris.min.js' %}"></script>
     <!-- Pignose Calender -->
-    <script src="{% static 'plugins/moment/moment.min.js' %}"></script>
-    <script src="{% static 'plugins/pg-calendar/js/pignose.calendar.min.js' %}"></script>
+    <script src="{% static './plugins/moment/moment.min.js' %}"></script>
+    <script src="{% static './plugins/pg-calendar/js/pignose.calendar.min.js' %}"></script>
     <!-- ChartistJS -->
-    <script src="{% static 'plugins/chartist/js/chartist.min.js' %}"></script>
-    <script src="{% static 'plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js' %}"></script>
+    <script src="{% static './plugins/chartist/js/chartist.min.js' %}"></script>
+    <script src="{% static './plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js' %}"></script>
 
 
 
-    <script src="{% static 'js/dashboard/dashboard-1.js' %}"></script>
+    <script src="{% static './js/dashboard/dashboard-1.js' %}"></script>
+
+    {%block js_page%}
+
+    {%endblock%}
+  
 
 </body>
 

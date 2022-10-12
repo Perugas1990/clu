@@ -1,12 +1,28 @@
 from django.urls import path, re_path
-from .views import citas_agregar_views
+from .views import VerPerfilUsuario, signup, login_view, logout_view
+from django.contrib.auth.decorators import login_required
 
 app_name = 'cliente'
 
 urlpatterns = [
     path(
-        'agregar/', 
-        citas_agregar_views.as_view(),
-        name = 'agregar_cliente'
+        'signup/', 
+        signup,
+        name='signup'
+    ),
+    path(
+        '', 
+        login_view,
+        name='login'
+    ),
+    path(
+        'logout/', 
+        logout_view,
+        name='logout'
+    ),
+    path(
+        'ver/<pk>/', 
+        login_required(VerPerfilUsuario.as_view()),
+        name='ver_cliente'
     ),
 ]

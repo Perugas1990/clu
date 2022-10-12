@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Usuario(models.Model):
@@ -41,7 +42,7 @@ class Usuario(models.Model):
     parentesco_tutor = models.CharField('ParentescoT', max_length=80, blank=True, null=True)
     telefono_tutor = models.CharField('CelularT', max_length=15, blank=True, null=True)
     direccion_tutor = models.CharField('DireccionT', max_length=300, blank=True, null=True)
-
+    username = models.CharField('Username', max_length=100, blank=False, null=False)
     def __str__(self):
         return self.nombres + ' ' + self.apellidos
 
