@@ -20,17 +20,42 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <p>{{usuario}}</p>
+                        <li class="mb-75">
+                            <span class="fw-bolder me-25">Identificacion:</span>
+                            <span>{{usuario.identificacion}}</span>
+                        </li>
+                        <li class="mb-75">
+                            <span class="fw-bolder me-25">Nombres:</span>
+                            <span>{{usuario.nombres}}</span>
+                        </li>
+                        <li class="mb-75">
+                            <span class="fw-bolder me-25">Direccion:</span>
+                            <span>{{ empresa.direccion }}</span>
+                        </li>
+                        <li class="mb-75">
+                            <span class="fw-bolder me-25">Tipo Ambiente:</span>
+                            <span>{{ empresa.sri_tipo_ambiente }}</span>
+                        </li>
+                        <li class="mb-75">
+                            <span class="fw-bolder me-25">Telefono:</span>
+                            <span>{{ empresa.telefono }}</span>
+                        </li>
+                        <li class="mb-75">
+                            <span class="fw-bolder me-25">Email:</span>
+                            <span>{{ empresa.email }}</span>
+                        </li>
+                        <li class="mb-75">
+                            <a href="{% if request.user.id != null %}{% url 'cliente:editar_cliente' request.user.id %}{% endif %}"
+                                    class="btn btn-primary me-1">
+                                    Editar
+                                </a>
+                        </li>
+                        
+                    
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores repellendus molestiae exercitationem voluptatem tempora quo dolore nostrum dolor consequuntur itaque, alias fugit. Architecto rerum animi velit, beatae corrupti quos nam saepe asperiores aliquid quae culpa ea reiciendis ipsam numquam laborum aperiam. Id tempore consequuntur velit vitae corporis, aspernatur praesentium ratione!</p>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
     <!-- #/ container -->

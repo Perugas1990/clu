@@ -1,8 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from .forms import UpdateClienteForm
 from .models import Usuario
 
 from .models import Usuario
@@ -17,6 +19,13 @@ from django.views.generic import (
 class VerPerfilUsuario(DetailView):
     model = Usuario
     template_name = 'ver_usuario.html'
+
+class ClienteUpdateView(UpdateView):
+    model = Usuario
+    template_name = 'editar_cliente.html'
+    form_class = UpdateClienteForm
+    success_url = reverse_lazy('citas:agregar_citas')
+
 # Create your views here.
 def login_view(request):
 
