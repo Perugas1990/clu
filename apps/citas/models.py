@@ -4,8 +4,9 @@ from apps.cliente.models import Usuario
 class Agenda(models.Model):
     
     cliente = models.ForeignKey(Usuario, models.DO_NOTHING, db_column='id_usuario')
-    fecha_desde = models.DateTimeField(blank=False, null=False)
-    fecha_hasta = models.DateTimeField(blank=False, null=False)
+    fecha = models.DateField(blank=False, null=False)
+    desde = models.TimeField(blank=False, null=False)
+    hasta = models.TimeField(blank=False, null=False)
     comentario = models.CharField(max_length=100, blank=True, null=True)
     estado = models.CharField(max_length=100,blank=True, null=True)
     created = models.DateTimeField(blank=False, null=False, auto_now_add=True)

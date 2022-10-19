@@ -2,190 +2,163 @@
 {% load static %}
 
 {%block css_page%}
-<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/forms/pickers/form-flat-pickr.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/forms/pickers/form-pickadate.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/app-invoice.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/forms/select/select2.min.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/extensions/jstree.min.css' %}">
-
+<link href="{%static 'plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
+<!-- Page plugins css -->
+<link href="{%static 'plugins/clockpicker/dist/jquery-clockpicker.min.css' %}" rel="stylesheet">
+<!-- Color picker plugins css -->
+<link href="{%static 'plugins/jquery-asColorPicker-master/css/asColorPicker.css' %}" rel="stylesheet">
+<!-- Date picker plugins css -->
+<link href="{%static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+<!-- Daterange picker plugins css -->
+<link href="{%static 'plugins/timepicker/bootstrap-timepicker.min.css' %}" rel="stylesheet">
+<link href="{%static 'plugins/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
 {%endblock%}
-
 {% block content-body %}
 
 
-<form class="auth-login-form mt-2" action="" method="POST"> {% csrf_token %}
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col">
-                    <h2> <strong>
-                            <div class="avatar bg-light-warning avatar-lg">
-                                <div class="avatar-content">
-                                    <i data-feather='calendar'></i>
+
+
+<div class="content-body">
+
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-validation">
+                            <form class="form-valide" action="" method="POST"> {% csrf_token %}
+                                <h1>Agendar Cita</h1>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-username">Fecha: <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{ form.fecha }}
+                                    </div>
+                                </div>                                
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-email">Desde: <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{ form.desde }}
+                                    </div>
                                 </div>
-                            </div>
-                            Agendar Cita
-                        </strong></h2>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-email">Hasta: <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{ form.hasta }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label"  for="val-email">Motivo Consulta<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{ form.comentario }}
+                                    </div>
+                                </div>
+                                {% if estado_boton == 'BORRADOR' %}
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+                                        <button type="submit" class="btn btn-primary" id="btn_confirmar_agenda" name="btn_confirmar_agenda">Confirmar</button>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if estado_boton == 'CONFIRMADO' %}
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+                                        <button type="submit" class="btn btn-primary" id="btn_atender_agenda" name="btn_atender_agenda">Atendido</button>
+                                        <button type="submit" class="btn btn-primary" id="btn_cancelar_agenda" name="btn_cancelar_agenda">Cancelar</button>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                {% if estado_boton == None %}
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+                                        <button type="submit" class="btn btn-primary" id="btn_agregar_agenda" name="btn_agregar_agenda">Crear</button>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+
+                                
+                            </form>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         </div>
-        <hr>
-        <form class="form form-horizontal">
-            <div class="card-body">
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mb-1 row">
-                            <div class="col-sm-3">
-                                <label class="col-form-label" for="first-name">Cliente</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i data-feather='user'></i></span>
-                                    {{ form.cliente }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="mb-1 row">
-                            <div class="col-sm-3">
-                                <label class="col-form-label" for="first-name">Desde:</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i data-feather='calendar'></i></span>
-                                    {{ form.fecha_desde }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="mb-1 row">
-                            <div class="col-sm-3">
-                                <label class="col-form-label" for="first-name">Hasta:</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i data-feather='calendar'></i></span>
-                                    {{ form.fecha_hasta }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="mb-1 row">
-                            <div class="col-sm-3">
-                                <label class="col-form-label" for="first-name">Razon:</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <span class="input-group-text"><i data-feather='message-circle'></i></span>
-                                    {{ form.comentario }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-9 offset-sm-3">
-                            <div class="mb-1">
-                                <div class="form-check">
-                                    {{ form.estado }}
-                                    <label class="form-check-label" for="customCheck1">Activo</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer table-responsive">
-                <table class="">
-                    <thead>
-                        <tr>
-                            {% if estado_boton == 'BORRADOR' %}
-                            <th>
-                                <button type="submit" id="btn_confirmar_agenda" name="btn_confirmar_agenda"
-                                    class="btn btn-success waves-effect waves-float waves-light">Confirmar</button>
-                            </th>
-                            {% endif %}
-                            {% if estado_boton == 'CONFIRMADO' %}
-                            <th>
-                                <button type="submit" id="btn_atender_agenda" name="btn_atender_agenda"
-                                    class="btn btn-success waves-effect waves-float waves-light">Atendido</button>
-                                <button type="submit" id="btn_cancelar_agenda" name="btn_cancelar_agenda"
-                                    class="btn btn-danger waves-effect waves-float waves-light">Cancelar</button>
-
-                            </th>
-                            {% endif %}
-
-                            {% if estado_boton == None %}
-                            <th>
-                                <button type="submit" id="btn_agregar_agenda" name="btn_agregar_agenda"
-                                    class="btn btn-primary me-1 waves-effect waves-float waves-light">Crear</button>
-
-                            </th>
-                            {% endif %}
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </form>
     </div>
-</form>
+    <!-- #/ container -->
 
+</div>
 
 
 
 {% endblock %}
 
 {%block js_page%}
-<script src="{% static 'app-assets/js/core/jquery.formset.js' %}"></script>
-<script src="{% static 'add-invoice-item.js' %}"></script>
-<script src="{% static 'app-invoice.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+    <!-- Clock Plugin JavaScript -->
+<script src="{% static 'plugins/clockpicker/dist/jquery-clockpicker.min.js' %}"></script>
+<!-- Color Picker Plugin JavaScript -->
+<script src="{% static 'plugins/jquery-asColorPicker-master/libs/jquery-asColor.js' %}"></script>
+<script src="{% static 'plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js' %}"></script>
+<script src="{% static 'plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js' %}"></script>
+<!-- Date Picker Plugin JavaScript -->
+<script src="{% static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+<!-- Date range Plugin JavaScript -->
+<script src="{% static 'plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
 
-<script src="{% static 'app-assets/vendors/js/forms/repeater/jquery.repeater.min.js' %}"></script>
-<script src="{% static 'app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+<script src="{% static 'js/plugins-init/form-pickers-init.js' %}"></script>
+<script src="{% static './plugins/moment/moment.min.js' %}"></script>
 <script src="{% static 'app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js' %}"></script>
 <script src="{% static 'app-assets/js/scripts/forms/pickers/form-pickers.js' %}"></script>
-<script src="{% static 'app-assets/vendors/js/extensions/jstree.min.js' %}"></script>
-
-<!-- END: Page Vendor JS-->
-
-<script src="{% static 'add-invoice-item.js' %}"></script>
-<script src="{% static 'app-invoice.js' %}"></script>
-<script src="{% static 'app-assets/js/scripts/components/components-dropdowns.js' %}"></script>
 
 <script>
-    const fechaInicio = document.querySelector('#id_fecha_desde');
-    const estado = document.querySelector('#id_estado');
+    const fechaInicio = document.querySelector('#id_desde');
+    
+    console.log(fechaInicio)
     recuperarTexto();
     function recuperarTexto() {
         fechaInicio.addEventListener('input', texto);
     }
     function texto() {
-        fechaI = new Date(fechaInicio.value);
-        var numberOfMlSeconds = fechaI.getTime();
+        fechaI = fechaInicio.value;
+        var timeParts = fechaI.split(":");
+        var numberOfMlSeconds = (+timeParts[0] * (60000 * 60)) + (+timeParts[1] * 60000);
         var addMlSeconds = 60 * 30000;
-        var fechaFin = new Date(numberOfMlSeconds + addMlSeconds);
-        document.querySelector('#id_fecha_hasta').value = formatDate(fechaFin);
+        var fechaFin = (numberOfMlSeconds + addMlSeconds);
+        console.log(fechaInicio)
+        document.querySelector('#id_hasta').value = msToTime(fechaFin);
+        
+        
     }
+   
 
-    function formatDate(date) {
+    function msToTime(duration) {
+        var minutes = Math.floor((duration / (1000 * 60)) % 60),
+            hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-        let dateElements = [
-            ['day', '0' + date.getDate()],
-            ['month', '0' + (date.getMonth() + 1)],
-            ['year', '' + date.getFullYear()],
-            ['hours', '0' + date.getHours()],
-            ['minutes', '0' + date.getMinutes()]
-        ].map(item => [item[0], item[1].slice(-2)]);
-
-        let { day, month, year, hours, minutes } = Object.fromEntries(dateElements);
-
-        return [`${date.getFullYear()}-${month}-${day} ${hours}:${minutes}`];
-    }
-
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        console.log(hours + ":" + minutes)
+        return hours + ":" + minutes;
+        }
 </script>
 {%endblock%}

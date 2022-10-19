@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Dosis';
+  src: url('../fonts/Dosis-ExtraLight.ttf');
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'Dosis';
+  src: url('../fonts/Dosis-Light.ttf');
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Dosis';
+  src: url('../fonts/Dosis-Regular.ttf');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Dosis';
+  src: url('../fonts/Dosis-Medium.ttf');
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Dosis';
+  src: url('../fonts/Dosis-SemiBold.ttf');
+  font-style: normal;
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Dosis';
+  src: url('../fonts/Dosis-Bold.ttf');
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Dosis';
+  src: url('../fonts/Dosis-ExtraBold.ttf');
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../css/icons/glyphicons/glyphicons-halflings-regular.eot');
+  src: url('../css/icons/glyphicons/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../css/icons/glyphicons/glyphicons-halflings-regular.woff2') format('woff2'), url('../css/icons/glyphicons/glyphicons-halflings-regular.woff') format('woff'), url('../css/icons/glyphicons/glyphicons-halflings-regular.ttf') format('truetype'), url('../css/icons/glyphicons/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}

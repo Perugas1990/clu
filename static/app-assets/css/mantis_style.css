@@ -1,0 +1,29 @@
+
+
+
+.col-form-label,  .col-form-label-lg, .col-form-label-sm{
+        font-size: 1rem!important;
+   }
+
+.text-upper{
+    text-transform: uppercase!important;
+}
+
+.text-center{
+    text-transform: uppercase!important;
+}
+   
+.avatar-lg > .avatar-content > .feather
+{
+    height: 2rem!important;
+    width: 2rem!important;
+}
+   
+hr {
+    margin: 0!important;
+}
+
+
+
+
+

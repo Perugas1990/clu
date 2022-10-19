@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block css_page%}
+<link href="{%static 'plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
+<!-- Page plugins css -->
+<link href="{%static 'plugins/clockpicker/dist/jquery-clockpicker.min.css' %}" rel="stylesheet">
+<!-- Color picker plugins css -->
+<link href="{%static 'plugins/jquery-asColorPicker-master/css/asColorPicker.css' %}" rel="stylesheet">
+<!-- Date picker plugins css -->
+<link href="{%static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+<!-- Daterange picker plugins css -->
+<link href="{%static 'plugins/timepicker/bootstrap-timepicker.min.css' %}" rel="stylesheet">
+<link href="{%static 'plugins/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+{%endblock%}
+{% block content-body %}
+
+
+<div class="content-body">
+    
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h4>Table Basic</h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>Nombre Cliente</th>
+                            <th>Fecha</th>
+                            <th>Horario</th>
+                            <th>Motivo</th>
+                            <th>Estado</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for a in page_obj.object_list %}
+                        <tr>
+                            <td><a >{{a.cliente}}</a></td>
+                            <td>{{a.fecha}}</td>
+                            <td>{{a.desde}}-{{a.hasta}}</td>
+                            <td>{{a.comentario}}</td>
+                            
+                            <td>
+                            {% if a.estado == "BORRADOR" %}<a  href="{% url 'citas:confirmar_cita' a.id %}" class="btn btn-sm mb-1 btn-light">{{a.estado}}</a>{% endif %}
+                            {% if a.estado == "CONFIRMADO" %}<a href="{% url 'citas:confirmar_cita' a.id %}"  class="btn btn-sm mb-1 btn-success">ACTIVO</a>{% endif %}
+                            {% if a.estado == "CANCELADA" %}<a class="btn btn-sm mb-1 btn-danger">{{a.estado}}</a>{% endif %}
+                            {% if a.estado == "ATENDIDA" %}<a  class="btn btn-sm mb-1 btn-info ">{{a.estado}}</a>{% endif %}
+                            
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  {% endblock %}
+
+  {%block js_page%}
+  <script src="{% static 'plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+      <!-- Clock Plugin JavaScript -->
+  <script src="{% static 'plugins/clockpicker/dist/jquery-clockpicker.min.js' %}"></script>
+  <!-- Color Picker Plugin JavaScript -->
+  <script src="{% static 'plugins/jquery-asColorPicker-master/libs/jquery-asColor.js' %}"></script>
+  <script src="{% static 'plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js' %}"></script>
+  <script src="{% static 'plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js' %}"></script>
+  <!-- Date Picker Plugin JavaScript -->
+  <script src="{% static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <!-- Date range Plugin JavaScript -->
+  <script src="{% static 'plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+  <script src="{% static 'plugins/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+  
+  <script src="{% static 'js/plugins-init/form-pickers-init.js' %}"></script>
+  {% endblock %}
