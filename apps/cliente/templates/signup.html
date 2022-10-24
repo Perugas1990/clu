@@ -53,6 +53,7 @@
                                 <form class="mt-5 mb-5 login-input" action="{% url 'cliente:signup' %}" method="POST">
                                     {% csrf_token %}
                                     <div class="form-group">
+                                        {{error1}}
                                         <input type="text" class="form-control"  placeholder="Usuario" name="username" required="true">
                                     </div>
                                     <div class="form-group">
@@ -62,6 +63,7 @@
                                         <input type="text" class="form-control"  placeholder="Apellido" name="apellido" required="true">
                                     </div>
                                     <div class="form-group">
+                                        {{error}}
                                         <input type="password" class="form-control" placeholder="Password" name="passwd" required="true">
                                     </div>
                                     <div class="form-group">

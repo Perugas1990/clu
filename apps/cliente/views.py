@@ -56,6 +56,9 @@ def signup(request):
         if passwd != passwd_confirmation:
             print('error')
             return render(request, 'signup.html', {'error':'Passwords no coinciden'} )
+        if Usuario.objects.filter(username=username).exists():
+            return render(request, 'signup.html', {'error1':'Nombre de usuario ya registrado'} )
+
         user = User.objects.create(
             username=username,
             password=make_password(passwd),
