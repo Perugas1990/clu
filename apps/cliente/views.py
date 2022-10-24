@@ -24,7 +24,10 @@ class ClienteUpdateView(UpdateView):
     model = Usuario
     template_name = 'editar_cliente.html'
     form_class = UpdateClienteForm
-    success_url = reverse_lazy('citas:agregar_citas')
+
+    def get_success_url(self):
+        usuario_id = self.request.user.id
+        return reverse('cliente:ver_cliente', kwargs={'pk': usuario_id})
 
 # Create your views here.
 def login_view(request):
@@ -37,9 +40,10 @@ def login_view(request):
         if user:
             
             login(request,user)
-            return redirect('citas:agregar_citas')
+            #return reverse('cliente:ver_cliente', request.user.id)
+            return redirect('cliente:editar_cliente', request.user.id)
         else:
-            return render(request,'login.html',{'error':'Passwords no sfsdcoinciden'})
+            return render(request,'login.html',{'error':'Passwords no coinciden'})
     return render(request,'login.html')
 
 def signup(request):

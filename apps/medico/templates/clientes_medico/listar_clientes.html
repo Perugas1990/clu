@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block css_page%}
+<link href="{%static 'plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
+<!-- Page plugins css -->
+<link href="{%static 'plugins/clockpicker/dist/jquery-clockpicker.min.css' %}" rel="stylesheet">
+<!-- Color picker plugins css -->
+<link href="{%static 'plugins/jquery-asColorPicker-master/css/asColorPicker.css' %}" rel="stylesheet">
+<!-- Date picker plugins css -->
+<link href="{%static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+<!-- Daterange picker plugins css -->
+<link href="{%static 'plugins/timepicker/bootstrap-timepicker.min.css' %}" rel="stylesheet">
+<link href="{%static 'plugins/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+{%endblock%}
+{% block content-body %}
+
+
+<div class="content-body">
+    
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+            </ol>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h4>Clientes</h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>nombres</th>
+                            <th>Apellidos</th>
+                            <th>Identificacion</th>                             
+                            <th>Cita</th>
+                            {% comment %}
+                            <th>Historia Clinica</th>
+                            {% endcomment %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for c in clientes %}
+                        <tr>
+                            <td><a >{{c.nombres}}</a></td>
+                            <td>{{c.apellidos}}</td>
+                            <td>{{c.identificacion}}</td>                             
+                            <td><a  href="{% url 'medico:citas_cliente_medico' c.id %}" class="btn btn-sm mb-1 btn-light">Citas</a></td>
+                            {% comment %} 
+                            <td><a  href="{% url 'citas:confirmar_cita' a.id %}" class="btn btn-sm mb-1 btn-light">Cita</a></td>  
+                            {% endcomment %}
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="bootstrap-pagination">
+            <nav>
+                {% if is_paginated %}
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number}}" tabindex="-1">Atras</a>
+                    </li>
+                    {% endif %}
+                    {%for pagina in paginator.page_range %}
+                    <li class="page-item"><a class="page-link" href="?page={{ pagina }}">{{ pagina }}</a>
+                    </li>
+                    {% endfor%}
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number}}">Siguiente</a>
+                    </li>
+                    {% endif %}
+                {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+  {% endblock %}
+
+  {%block js_page%}
+  <script src="{% static 'plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+      <!-- Clock Plugin JavaScript -->
+  <script src="{% static 'plugins/clockpicker/dist/jquery-clockpicker.min.js' %}"></script>
+  <!-- Color Picker Plugin JavaScript -->
+  <script src="{% static 'plugins/jquery-asColorPicker-master/libs/jquery-asColor.js' %}"></script>
+  <script src="{% static 'plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js' %}"></script>
+  <script src="{% static 'plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js' %}"></script>
+  <!-- Date Picker Plugin JavaScript -->
+  <script src="{% static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <!-- Date range Plugin JavaScript -->
+  <script src="{% static 'plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+  <script src="{% static 'plugins/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+  
+  <script src="{% static 'js/plugins-init/form-pickers-init.js' %}"></script>
+  {% endblock %}

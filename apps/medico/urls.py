@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import InsumosCreateView
+from .views import InsumosCreateView, InsumosListView, CalendarioMedicoListView, all_events1, UsuarioListView, CitasMedicoListView
 from django.contrib.auth.decorators import login_required
 
 
@@ -11,4 +11,25 @@ urlpatterns = [
         login_required(InsumosCreateView.as_view()),
         name='crear_insumos'
     ),
+    path(
+        'listar/insumos/', 
+        login_required(InsumosListView.as_view()),
+        name='listar_insumos'
+    ),
+    path(
+        'calendario/', 
+        login_required(CalendarioMedicoListView.as_view()),
+        name='calendario_medico'
+    ),
+    path(
+        'clientes/', 
+        login_required(UsuarioListView.as_view()),
+        name='clientes_medico'
+    ),
+    path(
+        'citas_cliente/<id>/', 
+        login_required(CitasMedicoListView.as_view()),
+        name='citas_cliente_medico'
+    ),
+    re_path('^all_events', all_events1, name='all_events'),
 ]

@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import CitaUpdateForm
 from django.core.paginator import Paginator
+from django.conf import settings
+from django.core.mail import send_mail
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -27,6 +29,14 @@ class CalendarioListView(ListView):
     def get_queryset(self):
         cliente_id = self.request.user.id
         return Agenda.objects.filter(cliente=cliente_id)
+
+def enviar_correo(mensaje,correo_destino, usuario, motivo):
+    subject = 'cita'
+    message = f'Estimado {user.username}, su cita para {motivo} se ha realizado espere confirmacion.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [correo_destino, ]
+    send_mail( subject, message, email_from, recipient_list )
+    return 
 
 @login_required
 def agendar_create_view1(request, id=None):
@@ -66,13 +76,25 @@ def agendar_create_view1(request, id=None):
                     
                 )
                 citas.save()
-
+                subject = 'cita'
+                message = f'Estimado {cliente}, su cita para {comentario} se ha realizado espere confirmacion.'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [cliente.correo, ]
+                send_mail( subject, message, email_from, recipient_list )
                 return redirect('citas:confirmar_cita', id=citas.id)
 
             if 'btn_confirmar_agenda' in request.POST:
                 form_agenda = form.save(commit=False)
+                fecha=form.cleaned_data.get('fecha')
+                desde = form.cleaned_data.get('desde')
+                comentario = form.cleaned_data.get('comentario')
                 form_agenda.estado = 'CONFIRMADO'
                 form_agenda.save()
+                subject = 'confirmacion_cita'
+                message = f'Estimado {cliente}, su cita para {comentario} esta registrada para la fecha {fecha} a las {desde}. Por favor llegar 15 minutos antes'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [cliente.correo, ]
+                send_mail( subject, message, email_from, recipient_list )
 
                 return redirect('citas:listar_cita')
 
