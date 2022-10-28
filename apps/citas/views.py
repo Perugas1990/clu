@@ -1,12 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .forms import CitaUpdateForm
 from django.core.paginator import Paginator
 from django.conf import settings
 from django.core.mail import send_mail
+from django.db.models import Q, F
 from django.views.generic import (
     TemplateView,
     ListView,
+    CreateView,
 )
 from .models import Agenda
 from apps.cliente.models import Usuario
@@ -38,6 +41,42 @@ def enviar_correo(mensaje,correo_destino, usuario, motivo):
     send_mail( subject, message, email_from, recipient_list )
     return 
 
+class CitaCreateView(CreateView):
+
+    template_name = 'agendar_cita.html'
+    model = Agenda
+    form_class = CitaUpdateForm
+    success_url = reverse_lazy('citas:listar_cita')
+
+    def form_valid(self, form):
+        cliente = Usuario.objects.get(id=int(self.request.user.id))
+        print(cliente)
+        form_cita = form.save(commit=False)
+        fecha = form.cleaned_data.get('fecha')
+        desde= form.cleaned_data.get('desde')
+        hasta = form.cleaned_data.get('hasta')
+        agenda1=Agenda.objects.filter(Q(fecha=fecha),Q(desde__lte=desde, hasta__gte=desde)|Q(desde__lte=hasta,hasta__gte=hasta)|Q(desde__gte=desde,hasta__lte=hasta))
+        if agenda1:
+            print(agenda1)
+            return super(CitaCreateView, self).form_invalid(form)
+        else:
+            pass
+        #print(citas_agendadas.comentario)
+        comentario = form.cleaned_data.get('comentario')
+        estado = 'BORRADOR'
+        form_cita.cliente=cliente
+        form_cita.estado=estado
+        #form_cita.save()     
+
+        return super(CitaCreateView, self).form_valid(form)
+ 
+    # specify the model for create view
+    
+ 
+    # specify the fields to be displayed
+ 
+
+
 @login_required
 def agendar_create_view1(request, id=None):
     template_name = 'agendar_cita.html'
@@ -65,23 +104,34 @@ def agendar_create_view1(request, id=None):
                 hasta = form.cleaned_data.get('hasta')
                 comentario = form.cleaned_data.get('comentario')
                 estado = form.cleaned_data.get('estado')
-
-                citas = Agenda.objects.create(
-                    cliente = cliente,
-                    fecha = fecha,
-                    desde = desde,
-                    hasta = hasta,
-                    comentario = comentario,
-                    estado = 'BORRADOR',
-                    
-                )
-                citas.save()
-                subject = 'cita'
-                message = f'Estimado {cliente}, su cita para {comentario} se ha realizado espere confirmacion.'
-                email_from = settings.EMAIL_HOST_USER
-                recipient_list = [cliente.correo, ]
-                send_mail( subject, message, email_from, recipient_list )
-                return redirect('citas:confirmar_cita', id=citas.id)
+                agenda1 = Agenda.objects.filter(Q(fecha=fecha), (Q(desde__gte=desde, desde__lt=hasta)|Q(hasta__gt=desde, hasta__lte=hasta)))
+                if agenda1:
+                    print(agenda1)
+                    return render(request,'agendar_cita.html',{
+                        'error':'existe agenda',
+                        'form': form,
+                        'id': id,
+                        'estado_boton': estado_boton,
+                        })
+                else:
+                    citas = Agenda.objects.create(
+                        cliente = cliente,
+                        fecha = fecha,
+                        desde = desde,
+                        hasta = hasta,
+                        comentario = comentario,
+                        estado = 'BORRADOR',
+                        
+                    )
+                
+                    #pass
+                    citas.save()
+                    subject = 'cita'
+                    message = f'Estimado {cliente}, su cita para {comentario} se ha realizado espere confirmacion.'
+                    email_from = settings.EMAIL_HOST_USER
+                    recipient_list = [cliente.correo, ]
+                    send_mail( subject, message, email_from, recipient_list )
+                    return redirect('citas:confirmar_cita', id=citas.id)
 
             if 'btn_confirmar_agenda' in request.POST:
                 form_agenda = form.save(commit=False)

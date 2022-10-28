@@ -11,10 +11,10 @@ class Agenda(models.Model):
     estado = models.CharField(max_length=100,blank=True, null=True)
     created = models.DateTimeField(blank=False, null=False, auto_now_add=True)
     
-
+    def __str__(self):
+        return self.comentario
     class Meta:
         managed = False
         db_table = 'agenda'
 
-    def __str__(self):
-        return self.comentario
+    

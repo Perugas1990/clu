@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import citas_agregar_views, agendar_create_view1, citas_list_view, all_events, CalendarioListView
+from .views import citas_agregar_views, agendar_create_view1, citas_list_view, all_events, CalendarioListView, CitaCreateView
 from django.contrib.auth.decorators import login_required
 
 app_name = 'citas'
@@ -7,7 +7,7 @@ app_name = 'citas'
 urlpatterns = [
     path(
         'agregar/', 
-        agendar_create_view1,
+        login_required(agendar_create_view1),
         name = 'agregar_citas'
     ),
     path(
