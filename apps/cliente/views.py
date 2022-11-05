@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from .forms import UpdateClienteForm
-from .models import Usuario
+from .models import Usuario, Historial, Atencion
 
 from .models import Usuario
 from django.views.generic import (
@@ -65,14 +65,19 @@ def signup(request):
             first_name=nombre,
             last_name=apellido,
             )
+        
         perfil = Usuario(
             id=user.id,
             username=username,
             nombres=nombre,
             apellidos=apellido
             )
-        print(perfil)
         perfil.save()
+        historial = Historial.objects.create(
+            cliente = Usuario.objects.get(username=username)
+        )
+        
+        historial.save()
         return redirect('cliente:login')
     return render(request, 'signup.html')
     
@@ -80,3 +85,5 @@ def signup(request):
 def logout_view(request):
     logout(request)
     return redirect('cliente:login')
+
+

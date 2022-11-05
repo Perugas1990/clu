@@ -12,7 +12,7 @@
                 </ul>
                 
             </li>
-            
+            {% if perms.cliente.ver_cliente %}
             <li class="mega-menu mega-menu-sm">
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Citas</span>
@@ -23,7 +23,8 @@
                     <li><a href="{% url 'citas:calendario' %}">Calendario</a></li>
                 </ul>
             </li>
-            {% if perms.cliente.can_view_user %}
+            {% endif %}
+            {% if perms.medico.ver_medico %}
             <li class="nav-label">Medico</li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">

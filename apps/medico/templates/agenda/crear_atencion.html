@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block css_page%}
+<link href="{%static 'plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css' %}" rel="stylesheet">
+<!-- Page plugins css -->
+<link href="{%static 'plugins/clockpicker/dist/jquery-clockpicker.min.css' %}" rel="stylesheet">
+<!-- Color picker plugins css -->
+<link href="{%static 'plugins/jquery-asColorPicker-master/css/asColorPicker.css' %}" rel="stylesheet">
+<!-- Date picker plugins css -->
+<link href="{%static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+<!-- Daterange picker plugins css -->
+<link href="{%static 'plugins/timepicker/bootstrap-timepicker.min.css' %}" rel="stylesheet">
+<link href="{%static 'plugins/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+{%endblock%}
+{% block content-body %}
+
+
+
+
+<div class="content-body">
+
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+            </ol>
+        </div>
+    </div>
+    <!-- row -->
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-validation">
+                            <form class="form-valide" action="" method="POST"> {% csrf_token %}
+                                <h1>Atencion</h1>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-username">1. Motivo de la consulta <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{atencion.m_consulta}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-email">2. Enfermedad o problema actual <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{atencion.enf_actual}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label"  for="val-email">3. Antecedentes personales y familiares<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{atencion.antecedentes}}
+                                    </div>
+                                </div>
+                                <h1>Examen Estomatogmatico</h1>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-username">Tipo <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{estomatogmatico.tipo}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-email">Patologia<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        {{estomatogmatico.detalle}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+
+</div>
+
+
+
+{% endblock %}
+
+{%block js_page%}
+<script src="{% static 'plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+    <!-- Clock Plugin JavaScript -->
+<script src="{% static 'plugins/clockpicker/dist/jquery-clockpicker.min.js' %}"></script>
+<!-- Color Picker Plugin JavaScript -->
+<script src="{% static 'plugins/jquery-asColorPicker-master/libs/jquery-asColor.js' %}"></script>
+<script src="{% static 'plugins/jquery-asColorPicker-master/libs/jquery-asGradient.js' %}"></script>
+<script src="{% static 'plugins/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js' %}"></script>
+<!-- Date Picker Plugin JavaScript -->
+<script src="{% static 'plugins/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+<!-- Date range Plugin JavaScript -->
+<script src="{% static 'plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+
+<script src="{% static 'js/plugins-init/form-pickers-init.js' %}"></script>
+{%endblock%}

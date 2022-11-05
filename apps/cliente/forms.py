@@ -2,7 +2,7 @@ from django import forms
 
 from django.contrib.admin import widgets
 
-from .models import Usuario
+from .models import Usuario, Atencion, Historial, Estomatogmatico, SignosVitales, Odontograma, PlanesDiagnostico
 from datetime import datetime, date
 
 class UpdateClienteForm(forms.ModelForm):
@@ -46,3 +46,4 @@ class UpdateClienteForm(forms.ModelForm):
             'direccion_tutor',
         ]
         
+

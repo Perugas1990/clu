@@ -30,4 +30,5 @@ urlpatterns = [
         login_required(ClienteUpdateView.as_view()),
         name='editar_cliente'
     ),
+    
 ]

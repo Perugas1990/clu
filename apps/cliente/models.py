@@ -50,3 +50,97 @@ class Usuario(models.Model):
     class Meta:
         managed = False
         db_table = 'usuario'
+
+
+class Historial(models.Model):
+    cliente = models.ForeignKey(Usuario, models.DO_NOTHING, db_column='id_cliente')
+
+    class Meta:
+        managed = False
+        db_table = 'historial'
+
+class Atencion(models.Model):
+    m_consulta = models.TextField(blank=True, null=True)
+    enf_actual = models.TextField(blank=True, null=True)
+    antecedentes = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+    id_historial = models.ForeignKey('Historial', models.DO_NOTHING, db_column='id_historial', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'atencion'
+
+class Odontograma(models.Model):
+    id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
+    diente = models.TextField(blank=True, null=True)
+    detalle = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+
+    class Meta:
+        managed = False
+        db_table = 'odontograma'
+
+
+
+
+class Estomatogmatico(models.Model):
+
+    selector = (
+        ('1','Labios'),
+        ('2','Glandulas salivales'),
+        ('3','Mejilla'),
+        ('4','Maxilar'),
+        ('5','Mandibula'),
+        ('6','Lengua'),
+        ('7','Paladar'),
+        ('8','Piso de boca'),
+        ('9','Orofaringe'),
+        ('10','Atm'),
+        ('11','Ganglios'),
+        ('12','Carillos'),
+    )
+    id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
+    tipo = models.CharField('Tipos',max_length=5, choices = selector)
+    detalle = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+
+    class Meta:
+        managed = False
+        db_table = 'estomatogmatico'
+
+
+class PlanesDiagnostico(models.Model):
+    id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
+    procedimiento = models.TextField(blank=True, null=True)
+    detalles = models.TextField(blank=True, null=True)
+    tipo = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+
+    class Meta:
+        managed = False
+        db_table = 'planes_diagnostico'
+
+
+class SaludOral(models.Model):
+    id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
+    piezas_dentales = models.IntegerField(blank=True, null=True)
+    placa = models.IntegerField(blank=True, null=True)
+    calculo = models.IntegerField(blank=True, null=True)
+    gingivitis = models.IntegerField(blank=True, null=True)
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+
+    class Meta:
+        managed = False
+        db_table = 'salud_oral'
+
+class SignosVitales(models.Model):
+    id_atencion = models.IntegerField(blank=True, null=True)
+    presion_arterial = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    frecuencia_cardiaca = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    temperatura = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    frecuencia_respiratoria = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+
+    class Meta:
+        managed = False
+        db_table = 'signos_vitales'

@@ -40,9 +40,7 @@
                             <th>Apellidos</th>
                             <th>Identificacion</th>                             
                             <th>Cita</th>
-                            {% comment %}
                             <th>Historia Clinica</th>
-                            {% endcomment %}
                         </tr>
                         </thead>
                         <tbody>
@@ -52,9 +50,7 @@
                             <td>{{c.apellidos}}</td>
                             <td>{{c.identificacion}}</td>                             
                             <td><a  href="{% url 'medico:citas_cliente_medico' c.id %}" class="btn btn-sm mb-1 btn-light">Citas</a></td>
-                            {% comment %} 
-                            <td><a  href="{% url 'citas:confirmar_cita' a.id %}" class="btn btn-sm mb-1 btn-light">Cita</a></td>  
-                            {% endcomment %}
+                            <td><a  href="{% url 'medico:crear_atencion' c.id %}" class="btn btn-sm mb-1 btn-light">Historia</a></td> 
                         </tr>
                         {% endfor %}
                         </tbody>

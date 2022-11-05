@@ -17,4 +17,3 @@ class Agenda(models.Model):
         managed = False
         db_table = 'agenda'
 
-    
