@@ -5,59 +5,75 @@
 
 <div class="content-body">
 
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-            </ol>
-        </div>
-    </div>
+   
     <!-- row -->
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col">
+            <div class="col-lg-8 col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        <li class="mb-75">
-                            <span class="fw-bolder me-25">Identificacion:</span>
-                            <span>{{usuario.identificacion}}</span>
-                        </li>
-                        <li class="mb-75">
-                            <span class="fw-bolder me-25">Nombres:</span>
-                            <span>{{usuario.nombres}}</span>
-                        </li>
-                        <li class="mb-75">
-                            <span class="fw-bolder me-25">Direccion:</span>
-                            <span>{{ empresa.direccion }}</span>
-                        </li>
-                        <li class="mb-75">
-                            <span class="fw-bolder me-25">Tipo Ambiente:</span>
-                            <span>{{ empresa.sri_tipo_ambiente }}</span>
-                        </li>
-                        <li class="mb-75">
-                            <span class="fw-bolder me-25">Telefono:</span>
-                            <span>{{ empresa.telefono }}</span>
-                        </li>
-                        <li class="mb-75">
-                            <span class="fw-bolder me-25">Email:</span>
-                            <span>{{ empresa.email }}</span>
-                        </li>
-                        <li class="mb-75">
-                            <a href="{% if request.user.id != null %}{% url 'cliente:editar_cliente' request.user.id %}{% endif %}"
-                                    class="btn btn-primary me-1">
-                                    Editar
-                                </a>
-                        </li>
+                        <div class="media align-items-center mb-4">
+                            
+                            <div class="media-body">
+                                <center>
+                                <h2 class="mb-0">{{usuario.nombres}}  {{usuario.apellidos}}</h2>
+                                <p class="text-muted mb-0">{{usuario.identificacion}}</p>
+                                </center>
+                            </div>
+                        </div>
                         
-                    
+                        <div class="row mb-5">
+                            <div class="col">
+                                
+                                <ul class="card-profile__info">
+                                    <li class="mb-1"><strong class="text-dark mr-4">Lugar de nacimiento</strong> <span>{{usuario.lugar_nacimiento}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Fecha de nacimiento</strong> <span>{{usuario.fecha_nacimiento}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Edad</strong> <span>{{usuario.edad}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Direccion</strong> <span>{{usuario.direccion}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Canton</strong> <span>{{usuario.canton}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Provincia</strong> <span>{{usuario.provincia}}</span></li>
+                                    
+                                </ul>
+                                
+                            </div>
+                            <div class="col">
+                                
+                                <ul class="card-profile__info">
+                                    <li class="mb-1"><strong class="text-dark mr-4">Pais</strong> <span>{{usuario.pais}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Sexo</strong> <span>{{usuario.sexo}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Tipo Sangre</strong> <span>{{usuario.tipo_sangre}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Lugar de nacimiento</strong> <span>{{usuario.pais}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Celular</strong> <span>{{usuario.celular}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Correo</strong> <span>{{usuario.correo}}</span></li>
+                                    <li class="mb-1"><strong class="text-dark mr-4">Lugar de nacimiento</strong> <span>{{usuario.pais}}</span></li>
+                                </ul>
+                                
+                            </div>
+                            <div class="col-12 text-center">
+                                <h4>Contacto de Emergencia</h4>
+                            </div>
+                            <div class="col-12 ">
+                                <li class="mb-1"><strong class="text-dark mr-4">Nombre</strong> <span>{{usuario.nombre_contacto_emergencia}}</span></li>
+                                <li class="mb-1"><strong class="text-dark mr-4">Parentesco</strong> <span>{{usuario.parentesco_contacto_emergencia}}</span></li>
+                                <li class="mb-1"><strong class="text-dark mr-4">Telefono</strong> <span>{{usuario.telefono_contacto_emergencia}}</span></li>
+                            </div>
+                            <div class="col-12 text-center">
+                                <h4>Tutor Legal</h4>
+                            </div>
+                            <div class="col-12 ">
+                                <li class="mb-1"><strong class="text-dark mr-4">Nombre</strong> <span>{{usuario.nombre_tutor}}</span></li>
+                                <li class="mb-1"><strong class="text-dark mr-4">Parentesco</strong> <span>{{usuario.parentesco_tutor}}</span></li>
+                                <li class="mb-1"><strong class="text-dark mr-4">Telefono</strong> <span>{{usuario.telefono_tutor}}</span></li>
+                                <li class="mb-1"><strong class="text-dark mr-4">Direccion</strong> <span>{{usuario.direccion_tutor}}</span></li>
+                            </div>
+                        </div>
+
+                        
                     </div>
-                </div>
+                </div>  
             </div>
             
         </div>
     </div>
-    <!-- #/ container -->
-</div>
 {% endblock %}

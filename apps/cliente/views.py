@@ -19,6 +19,8 @@ from django.views.generic import (
 class VerPerfilUsuario(DetailView):
     model = Usuario
     template_name = 'ver_usuario.html'
+    context_object_name = 'usuario'
+    
 
 class ClienteUpdateView(UpdateView):
     model = Usuario
