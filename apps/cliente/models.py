@@ -71,9 +71,78 @@ class Atencion(models.Model):
         db_table = 'atencion'
 
 class Odontograma(models.Model):
+
+    selector = (
+        ('1','11'),
+        ('2','12'),
+        ('3','13'),
+        ('4','14'),
+        ('5','15'),
+        ('6','16'),
+        ('7','17'),
+        ('8','18'),
+        ('9','21'),
+        ('10','22'),
+        ('11','23'),
+        ('12','24'),
+        ('13','25'),
+        ('14','26'),
+        ('15','27'),
+        ('16','28'),
+        ('17','31'),
+        ('18','32'),
+        ('19','33'),
+        ('20','34'),
+        ('21','35'),
+        ('22','36'),
+        ('23','37'),
+        ('24','38'),
+        ('25','41'),
+        ('26','42'),
+        ('27','43'),
+        ('28','44'),
+        ('29','45'),
+        ('30','46'),
+        ('31','47'),
+        ('32','48'),
+        ('33','51'),
+        ('34','52'),
+        ('35','53'),
+        ('36','54'),
+        ('37','55'),
+        ('38','61'),
+        ('39','62'),
+        ('40','63'),
+        ('41','64'),
+        ('42','65'),
+        ('43','71'),
+        ('44','72'),
+        ('45','73'),
+        ('46','74'),
+        ('47','75'),
+        ('48','81'),
+        ('49','82'),
+        ('50','83'),
+        ('51','84'),
+        ('52','85'),
+    )
+    simbologia = (
+        ('1','Sellante necesario'),
+        ('2','A-Sellante necesario'),
+        ('3','Extraccion indicada'),
+        ('4','Perdida por caries'),
+        ('5','Perdida(otra causa)'),
+        ('6','Endodoncia'),
+        ('7','Protesis Fija'),
+        ('8','Protesis removible'),
+        ('9','Protesis total'),
+        ('10','Corona'),
+        ('11','Caries'),
+        ('12','Obturado'),
+    )
     id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
-    diente = models.TextField(blank=True, null=True)
-    detalle = models.TextField(blank=True, null=True)
+    diente = models.CharField('Tipos',max_length=5, choices = selector)
+    detalle = models.CharField('Simmbologia',max_length=5, choices = simbologia)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
 
     class Meta:
@@ -134,7 +203,7 @@ class SaludOral(models.Model):
         db_table = 'salud_oral'
 
 class SignosVitales(models.Model):
-    id_atencion = models.IntegerField(blank=True, null=True)
+    id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
     presion_arterial = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     frecuencia_cardiaca = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     temperatura = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)

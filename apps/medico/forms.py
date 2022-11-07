@@ -35,3 +35,33 @@ class EstomatogmaticoForm(forms.ModelForm):
             'tipo', 
             'detalle',        
         ]
+
+class SignosForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(SignosForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if not isinstance(field, forms.BooleanField):
+                field.widget.attrs['class'] = 'form-control'
+    class Meta:
+        model = SignosVitales
+        fields = [
+            'presion_arterial', 
+            'frecuencia_cardiaca',    
+            'temperatura',   
+            'frecuencia_respiratoria',
+        ]
+
+class OdontogramaForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(OdontogramaForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if not isinstance(field, forms.BooleanField):
+                field.widget.attrs['class'] = 'form-control'
+    class Meta:
+        model = Odontograma
+        fields = [
+            'diente', 
+            'detalle',    
+        ]

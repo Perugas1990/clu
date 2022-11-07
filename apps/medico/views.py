@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import permission_required
 from django.urls import reverse_lazy, reverse
 from .models import Insumos
 from apps.citas.models import Agenda
-from apps.cliente.models import Usuario, Atencion, Historial, Estomatogmatico
-from .forms import AtencionForm, EstomatogmaticoForm
+from apps.cliente.models import Usuario, Atencion, Historial, Estomatogmatico, SignosVitales, Odontograma
+from .forms import AtencionForm, EstomatogmaticoForm, SignosForm, OdontogramaForm
 from django.views.generic import (
     ListView,
     CreateView,
@@ -81,6 +81,8 @@ def atencion_view(request,id=None):
     template_name = 'agenda/crear_atencion.html'
     form_atencion = AtencionForm(request.POST or None)
     form_estomatogmatico = EstomatogmaticoForm(request.POST or None)
+    form_signos = SignosForm(request.POST or None)
+    form_odontograma = OdontogramaForm(request.POST or None)
     usuario = Usuario.objects.get(id=id)
     historial_id = Historial.objects.get(cliente = usuario)
     print(historial_id.id)
@@ -99,34 +101,48 @@ def atencion_view(request,id=None):
                 id_historial = historial_id,
             )            
             atencion.save()
-            if form_estomatogmatico.is_valid():
-
+            if form_signos.is_valid():
                 atencion_id = Atencion.objects.get(id=atencion.id)
-                tipo = form_estomatogmatico.cleaned_data.get('tipo')
-                detalle = form_estomatogmatico.cleaned_data.get('detalle')
+                presion_arterial = form_signos.cleaned_data.get('presion_arterial')
+                frecuencia_cardiaca = form_signos.cleaned_data.get('frecuencia_cardiaca')
+                temperatura = form_signos.cleaned_data.get('temperatura')
+                frecuencia_respiratoria = form_signos.cleaned_data.get('frecuencia_respiratoria')
 
-                atencion = Estomatogmatico.objects.create(
+                signos = SignosVitales.objects.create(
                     id_atencion=atencion_id,
-                    tipo = consulta,
-                    detalle = enfermedad,
+                    presion_arterial = presion_arterial,
+                    frecuencia_cardiaca = frecuencia_cardiaca,
+                    temperatura = temperatura,
+                    frecuencia_respiratoria = frecuencia_respiratoria,
                 )
                 if form_estomatogmatico.is_valid():
-
-                    atencion_id = Atencion.objects.get(id=atencion.id)
+                    
                     tipo = form_estomatogmatico.cleaned_data.get('tipo')
                     detalle = form_estomatogmatico.cleaned_data.get('detalle')
 
-                    atencion = Estomatogmatico.objects.create(
+                    estomatogmatico = Estomatogmatico.objects.create(
                         id_atencion=atencion_id,
                         tipo = consulta,
                         detalle = enfermedad,
                     )
+                    if form_odontograma.is_valid():
+                    
+                        diente= form_odontograma.cleaned_data.get('tipo')
+                        detalle = form_odontograma.cleaned_data.get('detalle')
+
+                        odontograma = Odontograma.objects.create(
+                            id_atencion=atencion_id,
+                            diente = diente,
+                            detalle = enfermedad,
+                        )
 
                     return redirect('medico:clientes_medico')
 
     context = {
         'atencion':form_atencion,
         'estomatogmatico': form_estomatogmatico, 
+        'signos': form_signos, 
+        'odontograma' : form_odontograma,
 
     }
     
