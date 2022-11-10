@@ -1,10 +1,14 @@
+from datetime import datetime, timedelta, date
 from django.shortcuts import get_object_or_404, redirect, render
+from django.http.response import Http404, HttpResponse
 from django.contrib.auth.decorators import permission_required
 from django.urls import reverse_lazy, reverse
 from .models import Insumos
 from apps.citas.models import Agenda
 from apps.cliente.models import Usuario, Atencion, Historial, Estomatogmatico, SignosVitales, Odontograma
 from .forms import AtencionForm, EstomatogmaticoForm, SignosForm, OdontogramaForm
+from .parsers import export_reporte_hoja_calculo
+from .constantes import FORMATOS_ARCHIVOS
 from django.views.generic import (
     ListView,
     CreateView,
@@ -174,3 +178,41 @@ def estomatogmatico_view(request,id=None):
     }
     
     return render(request, template_name, context)
+
+def export_recetario_medico(request, id):
+    """
+    Exportar recetario medico
+    """
+    usuario = get_object_or_404(Usuario,id=id)
+    print(usuario)
+    plantilla = 'recetario.odt'
+
+    template_recetario = 'apps/medico/receta/templates/odt/' + plantilla
+
+    template_documento = template_recetario
+
+    
+    content_type = FORMATOS_ARCHIVOS.get('PDF').get('content_type')
+
+    now = datetime.now()
+    dia = now.day
+    mes = now.month
+    año = now.year
+
+    data = {
+        'u':usuario,
+        'd':dia,
+        'm':mes,
+        'a':año,
+    }
+
+    archivo_salida = export_reporte_hoja_calculo(
+        data, template_documento, 'PDF'
+    )
+
+    with open(archivo_salida, 'rb') as archivo_salida:
+        response = HttpResponse(archivo_salida.read(),
+                                content_type=content_type)
+        response['Content-Disposition'] = 'inline; filename=RM-{0}.pdf'
+        
+    return response
