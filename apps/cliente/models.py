@@ -5,19 +5,19 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Usuario(models.Model):
     opciones_genero = (
-        ('M', 'Masculino'),
-        ('F', 'Femenino'),
-        ('N/A', 'Ninguno'),
+        ('Masculino', 'Masculino'),
+        ('Femenino', 'Femenino'),
+        ('N/A', 'N/A'),
     )
     tipos_sangre = (
-        ('1','A+'),
-        ('2','A-'),
-        ('3','B+'),
-        ('4','B-'),
-        ('5','AB+'),
-        ('6','AB-'),
-        ('7','O+'),
-        ('8','O-'),
+        ('A+','A+'),
+        ('A-','A-'),
+        ('B+','B+'),
+        ('B-','B-'),
+        ('AB+','AB+'),
+        ('AB-','AB-'),
+        ('O+','O+'),
+        ('O-','O-'),
     )
     identificacion = models.CharField('Cedula', max_length=15, blank=False, null=False)
     nombres = models.CharField('Nombre', max_length=100, blank=False, null=False)
@@ -73,76 +73,76 @@ class Atencion(models.Model):
 class Odontograma(models.Model):
 
     selector = (
-        ('1','11'),
-        ('2','12'),
-        ('3','13'),
-        ('4','14'),
-        ('5','15'),
-        ('6','16'),
-        ('7','17'),
-        ('8','18'),
-        ('9','21'),
-        ('10','22'),
-        ('11','23'),
-        ('12','24'),
-        ('13','25'),
-        ('14','26'),
-        ('15','27'),
-        ('16','28'),
-        ('17','31'),
-        ('18','32'),
-        ('19','33'),
-        ('20','34'),
-        ('21','35'),
-        ('22','36'),
-        ('23','37'),
-        ('24','38'),
-        ('25','41'),
-        ('26','42'),
-        ('27','43'),
-        ('28','44'),
-        ('29','45'),
-        ('30','46'),
-        ('31','47'),
-        ('32','48'),
-        ('33','51'),
-        ('34','52'),
-        ('35','53'),
-        ('36','54'),
-        ('37','55'),
-        ('38','61'),
-        ('39','62'),
-        ('40','63'),
-        ('41','64'),
-        ('42','65'),
-        ('43','71'),
-        ('44','72'),
-        ('45','73'),
-        ('46','74'),
-        ('47','75'),
-        ('48','81'),
-        ('49','82'),
-        ('50','83'),
-        ('51','84'),
-        ('52','85'),
+        ('11','11'),
+        ('12','12'),
+        ('13','13'),
+        ('14','14'),
+        ('15','15'),
+        ('16','16'),
+        ('17','17'),
+        ('18','18'),
+        ('21','21'),
+        ('22','22'),
+        ('23','23'),
+        ('24','24'),
+        ('25','25'),
+        ('26','26'),
+        ('27','27'),
+        ('28','28'),
+        ('31','31'),
+        ('32','32'),
+        ('33','33'),
+        ('34','34'),
+        ('35','35'),
+        ('36','36'),
+        ('37','37'),
+        ('38','38'),
+        ('41','41'),
+        ('42','42'),
+        ('43','43'),
+        ('44','44'),
+        ('45','45'),
+        ('46','46'),
+        ('47','47'),
+        ('48','48'),
+        ('51','51'),
+        ('52','52'),
+        ('53','53'),
+        ('54','54'),
+        ('55','55'),
+        ('61','61'),
+        ('62','62'),
+        ('63','63'),
+        ('64','64'),
+        ('65','65'),
+        ('71','71'),
+        ('72','72'),
+        ('73','73'),
+        ('74','74'),
+        ('75','75'),
+        ('81','81'),
+        ('82','82'),
+        ('83','83'),
+        ('84','84'),
+        ('85','85'),
     )
     simbologia = (
-        ('1','Sellante necesario'),
-        ('2','A-Sellante necesario'),
-        ('3','Extraccion indicada'),
-        ('4','Perdida por caries'),
-        ('5','Perdida(otra causa)'),
-        ('6','Endodoncia'),
-        ('7','Protesis Fija'),
-        ('8','Protesis removible'),
-        ('9','Protesis total'),
-        ('10','Corona'),
-        ('11','Caries'),
-        ('12','Obturado'),
+        ('Sellante necesario','Sellante necesario'),
+        ('A-Sellante necesario','A-Sellante necesario'),
+        ('Extraccion indicada','Extraccion indicada'),
+        ('Perdida por caries','Perdida por caries'),
+        ('Perdida(otra causa)','Perdida(otra causa)'),
+        ('Endodoncia','Endodoncia'),
+        ('Protesis Fija','Protesis Fija'),
+        ('Protesis removible','Protesis removible'),
+        ('Protesis total','Protesis total'),
+        ('Corona','Corona'),
+        ('Caries','Caries'),
+        ('Obturado','Obturado'),
     )
     id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
     diente = models.CharField('Tipos',max_length=5, choices = selector)
-    detalle = models.CharField('Simmbologia',max_length=5, choices = simbologia)
+    detalle = models.CharField('Simbologia',max_length=35, choices = simbologia)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
 
     class Meta:
@@ -155,21 +155,21 @@ class Odontograma(models.Model):
 class Estomatogmatico(models.Model):
 
     selector = (
-        ('1','Labios'),
-        ('2','Glandulas salivales'),
-        ('3','Mejilla'),
-        ('4','Maxilar'),
-        ('5','Mandibula'),
-        ('6','Lengua'),
-        ('7','Paladar'),
-        ('8','Piso de boca'),
-        ('9','Orofaringe'),
-        ('10','Atm'),
-        ('11','Ganglios'),
-        ('12','Carillos'),
+        ('Labios','Labios'),
+        ('Glandulas salivales','Glandulas salivales'),
+        ('Mejilla','Mejilla'),
+        ('Maxilar','Maxilar'),
+        ('Mandibula','Mandibula'),
+        ('Lengua','Lengua'),
+        ('Paladar','Paladar'),
+        ('Piso de boca','Piso de boca'),
+        ('Orofaringe','Orofaringe'),
+        ('Atm','Atm'),
+        ('Ganglios','Ganglios'),
+        ('Carillos','Carillos'),
     )
     id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
-    tipo = models.CharField('Tipos',max_length=5, choices = selector)
+    tipo = models.CharField('Tipos',max_length=45, choices = selector)
     detalle = models.TextField(blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
 
@@ -204,10 +204,10 @@ class SaludOral(models.Model):
 
 class SignosVitales(models.Model):
     id_atencion = models.ForeignKey(Atencion, models.DO_NOTHING, db_column='id_atencion', blank=True, null=True)
-    presion_arterial = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
-    frecuencia_cardiaca = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
-    temperatura = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
-    frecuencia_respiratoria = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    presion_arterial = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+    frecuencia_cardiaca = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+    temperatura = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+    frecuencia_respiratoria = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
     created = models.DateTimeField(blank=True, null=True, auto_now_add=True)
 
     class Meta:

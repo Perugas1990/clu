@@ -4,6 +4,7 @@ from django.http.response import Http404, HttpResponse
 from django.contrib.auth.decorators import permission_required
 from django.urls import reverse_lazy, reverse
 from .models import Insumos
+from django.db.models import Q
 from apps.citas.models import Agenda
 from apps.cliente.models import Usuario, Atencion, Historial, Estomatogmatico, SignosVitales, Odontograma
 from .forms import AtencionForm, EstomatogmaticoForm, SignosForm, OdontogramaForm
@@ -86,6 +87,7 @@ def atencion_view(request,id=None):
     form_atencion = AtencionForm(request.POST or None)
     form_estomatogmatico = EstomatogmaticoForm(request.POST or None)
     form_signos = SignosForm(request.POST or None)
+    print(form_signos)
     form_odontograma = OdontogramaForm(request.POST or None)
     usuario = Usuario.objects.get(id=id)
     historial_id = Historial.objects.get(cliente = usuario)
@@ -93,7 +95,7 @@ def atencion_view(request,id=None):
     if request.method == 'POST':
 
         if form_atencion.is_valid():
-
+            print('atencion')
             consulta = form_atencion.cleaned_data.get('m_consulta')
             enfermedad = form_atencion.cleaned_data.get('enf_actual')
             antecedentes = form_atencion.cleaned_data.get('antecedentes')
@@ -106,6 +108,7 @@ def atencion_view(request,id=None):
             )            
             atencion.save()
             if form_signos.is_valid():
+                print('signos')
                 atencion_id = Atencion.objects.get(id=atencion.id)
                 presion_arterial = form_signos.cleaned_data.get('presion_arterial')
                 frecuencia_cardiaca = form_signos.cleaned_data.get('frecuencia_cardiaca')
@@ -119,26 +122,29 @@ def atencion_view(request,id=None):
                     temperatura = temperatura,
                     frecuencia_respiratoria = frecuencia_respiratoria,
                 )
+                signos.save()
                 if form_estomatogmatico.is_valid():
-                    
+                    print('estomatogmatico')
                     tipo = form_estomatogmatico.cleaned_data.get('tipo')
                     detalle = form_estomatogmatico.cleaned_data.get('detalle')
 
                     estomatogmatico = Estomatogmatico.objects.create(
                         id_atencion=atencion_id,
-                        tipo = consulta,
-                        detalle = enfermedad,
+                        tipo = tipo,
+                        detalle = detalle,
                     )
+                    estomatogmatico.save()
                     if form_odontograma.is_valid():
-                    
-                        diente= form_odontograma.cleaned_data.get('tipo')
+                        print('odontograma')
+                        diente= form_odontograma.cleaned_data.get('diente')
                         detalle = form_odontograma.cleaned_data.get('detalle')
 
                         odontograma = Odontograma.objects.create(
                             id_atencion=atencion_id,
                             diente = diente,
-                            detalle = enfermedad,
+                            detalle = detalle,
                         )
+                        odontograma.save()
 
                     return redirect('medico:clientes_medico')
 
@@ -179,12 +185,18 @@ def estomatogmatico_view(request,id=None):
     
     return render(request, template_name, context)
 
-def export_recetario_medico(request, id):
+def export_recetario_medico(request, id, atencion):
     """
     Exportar recetario medico
     """
-    usuario = get_object_or_404(Usuario,id=id)
-    print(usuario)
+    usuario = Usuario.objects.get(id=id)
+    historial = get_object_or_404(Historial,cliente=usuario.pk)
+    atencion = Atencion.objects.get(Q(id_historial=historial.pk),Q(id=atencion))
+    signos = get_object_or_404(SignosVitales,id_atencion=atencion.pk)
+    estomatogmatico = get_object_or_404(Estomatogmatico,id_atencion=atencion.pk)
+    odontograma = get_object_or_404(Odontograma,id_atencion=atencion.pk)
+    print(atencion.pk)
+    print(usuario.pk)
     plantilla = 'recetario.odt'
 
     template_recetario = 'apps/medico/receta/templates/odt/' + plantilla
@@ -204,6 +216,10 @@ def export_recetario_medico(request, id):
         'd':dia,
         'm':mes,
         'a':año,
+        'at': atencion,
+        's': signos,
+        'es': estomatogmatico,
+        'o' :odontograma,
     }
 
     archivo_salida = export_reporte_hoja_calculo(
@@ -216,3 +232,34 @@ def export_recetario_medico(request, id):
         response['Content-Disposition'] = 'inline; filename=RM-{0}.pdf'
         
     return response
+
+class HistorialListView(ListView):
+    model = Atencion
+    template_name = 'agenda/list_atencion.html'
+    context_object_name = 'atencion'
+    def get_queryset(self):
+        id = self.kwargs['id']
+        usuario = Usuario.objects.get(id=id)
+        historial = get_object_or_404(Historial,cliente=usuario.pk)
+        atencion = Atencion.objects.filter(id_historial=historial.pk)
+        return atencion
+
+    def get_context_data(self,**kwargs):
+        context = super(HistorialListView,self).get_context_data(**kwargs)
+        id = self.kwargs['id']
+        usuario = Usuario.objects.get(id=id)
+        context['usuario']=usuario.pk
+        return context
+
+def historial_list_view(request, id):
+    usuario = Usuario.objects.get(id=id)
+    historial = get_object_or_404(Historial,cliente=usuario.pk)
+    atencion = Atencion.objects.filter(id_historial=historial.pk)
+    template_name = 'agenda/list_atencion.html'
+
+    context = {
+        'atencion':atencion,
+        'usuario':usuario.pk,
+        
+    }
+    return render(request, template_name, context)

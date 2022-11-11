@@ -69,7 +69,10 @@
                             </div>
                         </div>
 
-                        <a href="{% url 'cliente:editar_cliente' usuario.id %}" type="button"  class="btn mb-1 btn-outline-info">Editar</a>    
+                        <a href="{% url 'cliente:editar_cliente' usuario.id %}" type="button"  class="btn mb-1 btn-outline-info">Editar</a> 
+                        {% if perms.cliente.ver_cliente %}   
+                        <a href="{% url 'medico:list_historial' usuario.id %}" type="button"  class="btn mb-1 btn-outline-info">Historial</a>  
+                        {% endif %}
                     </div>
                 </div>  
             </div>

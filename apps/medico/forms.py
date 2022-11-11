@@ -65,3 +65,5 @@ class OdontogramaForm(forms.ModelForm):
             'diente', 
             'detalle',    
         ]
+
+

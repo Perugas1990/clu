@@ -36,23 +36,17 @@
                     <table class="table table-sm">
                         <thead>
                         <tr>
-                            <th>nombres</th>
-                            <th>Apellidos</th>
-                            <th>Identificacion</th>                             
-                            <th>Cita</th>
-                            <th>Atencion</th>
-                            <th>Historia Clinica</th>
+                            <th>Fecha</th>
+                            <th>Consulta</th>
+                            <th>Antecedentes{{atencion.usuario}}</th>        
                         </tr>
                         </thead>
                         <tbody>
-                        {% for c in clientes %}
+                        {% for a in atencion %}
                         <tr>
-                            <td><a >{{c.nombres}}</a></td>
-                            <td>{{c.apellidos}}</td>
-                            <td>{{c.identificacion}}</td>                             
-                            <td><a  href="{% url 'medico:citas_cliente_medico' c.id %}" class="btn btn-sm mb-1 btn-light">Citas</a></td>
-                            <td><a  href="{% url 'medico:crear_atencion' c.id %}" class="btn btn-sm mb-1 btn-light">Atencion</a></td> 
-                            <td><a  href="{% url 'medico:list_historial' c.id %}" class="btn btn-sm mb-1 btn-light">Historial</a></td> 
+                            <td><a  href="{% url 'medico:print_recetario' usuario a.id %}" class="btn btn-sm mb-1 btn-light" target="_blank">{{a.created}}</a></td>
+                            <td>{{a.m_consulta}}</td>
+                            <td>{{a.antecedentes}}</td>   
                         </tr>
                         {% endfor %}
                         </tbody>

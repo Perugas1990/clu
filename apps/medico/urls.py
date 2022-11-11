@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .views import export_recetario_medico,atencion_view, InsumosCreateView, InsumosListView, CalendarioMedicoListView, all_events1, UsuarioListView, CitasMedicoListView
+from .views import historial_list_view, export_recetario_medico,atencion_view, InsumosCreateView, InsumosListView, CalendarioMedicoListView, all_events1, UsuarioListView, CitasMedicoListView
 from django.contrib.auth.decorators import login_required
 
 
@@ -36,6 +36,11 @@ urlpatterns = [
         login_required(atencion_view),
         name='crear_atencion'
     ),
-    path('print/recetario/<int:id>/', export_recetario_medico, name='print_recetario'),
+    path(
+        'list_historial/<id>/', 
+        login_required(historial_list_view),
+        name='list_historial'
+    ),
+    path('print/recetario/<int:id>/<int:atencion>/', export_recetario_medico, name='print_recetario'),
     re_path('^all_events', all_events1, name='all_events'),
 ]
