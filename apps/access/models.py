@@ -19,6 +19,8 @@ class Medico(models.Model):
     correo = models.CharField(max_length=30, blank=True, null=True)
     telefono = models.CharField(max_length=12, blank=True, null=True)
 
+    def __str__(self):
+        return "Dr. "+self.nombres + self.apellidos
     class Meta:
         managed = False
         db_table = 'medico'

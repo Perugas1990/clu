@@ -45,6 +45,16 @@
                     <li><a href="{% url 'medico:calendario_medico' %}">Calendario</a></li>
                 </ul>
             </li>
+
+            <li class="mega-menu mega-menu-sm">
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Portada</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'access:editar_empresa' 1 %}">Editar Empresa</a></li>
+                    <li><a href="{% url 'access:editar_contacto' 1 %}">Editar Contacto</a></li>
+                </ul>
+            </li>
             {% endif %}
             
             {% comment %}
