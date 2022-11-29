@@ -82,10 +82,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="{% url 'access:home' %}" class="nav-item nav-link active">Home</a>
-                        <a href="{% url 'access:mision' %}" class="nav-item nav-link">Acerca de</a>  
-                        {% comment %}                      
-                        <a href="service.html" class="nav-item nav-link">Vision</a>                        
+                        <a href="{% url 'access:home' %}" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'access:mision' %}" class="nav-item nav-link active">Acerca de</a>                        
+                        {% comment %}                        
+                        <a href="service.html" class="nav-item nav-link">Vision</a>
                         <a href="price.html" class="nav-item nav-link">Pricing</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -107,7 +107,7 @@
     </div>
     <!-- Navbar End -->
 
-
+    {% comment %}
     <!-- Hero Start -->
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
         <div class="container py-5">
@@ -116,63 +116,69 @@
                     <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5" style="border-color: rgba(256, 256, 256, .3) !important;">Bienvenido a {{empresa.nombre}}</h5>
                     <h1 class="display-1 text-white mb-md-4">Lo mejor en salud odontologica para su familia</h1>
                     <div class="pt-2">
-                        <a href="{% url 'cliente:login' %}" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Login</a>
-                        <a href="" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Register</a>
+                        <a href="" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Entrar</a>
+                        <a href="" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Registrar</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Hero End -->
-
-    {% comment %}
+    {% endcomment %}
+    
     <!-- About Start -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded" src="img/about.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100 rounded" src="{% static 'index/img/about.jpg' %}" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="mb-4">
-                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">About Us</h5>
-                        <h1 class="display-4">Best Medical Care For Yourself and Your Family</h1>
+                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Acerca de Nosotros</h5>
+                        <h1 class="display-4">Mision</h1>
                     </div>
-                    <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                    <p>{{empresa.mision}}</p>
+                    <div class="mb-4">
+                        <h1 class="display-4">Vision</h1>
+                    </div>
+                    <p>{{empresa.vision}}</p>
                     <div class="row g-3 pt-3">
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
                                 <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
-                                <h6 class="mb-0">Qualified<small class="d-block text-primary">Doctors</small></h6>
+                                <h6 class="mb-0">Personal Cualificado<small class="d-block text-primary">Medicos</small></h6>
                             </div>
                         </div>
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
                                 <i class="fa fa-3x fa-procedures text-primary mb-3"></i>
-                                <h6 class="mb-0">Emergency<small class="d-block text-primary">Services</small></h6>
+                                <h6 class="mb-0">Emergencia<small class="d-block text-primary">Servicio</small></h6>
                             </div>
                         </div>
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
                                 <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
-                                <h6 class="mb-0">Accurate<small class="d-block text-primary">Testing</small></h6>
+                                <h6 class="mb-0">Examenes<small class="d-block text-primary">Odontologicos</small></h6>
                             </div>
                         </div>
+                        {% comment %}
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
                                 <i class="fa fa-3x fa-ambulance text-primary mb-3"></i>
                                 <h6 class="mb-0">Free<small class="d-block text-primary">Ambulance</small></h6>
                             </div>
                         </div>
+                        {% endcomment %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- About End -->
-    
+    {% comment %}
 
     <!-- Services Start -->
     <div class="container-fluid py-5">
