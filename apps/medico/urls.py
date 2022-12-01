@@ -1,5 +1,10 @@
 from django.urls import path, re_path
-from .views import historial_list_view, export_recetario_medico,atencion_view, InsumosCreateView, InsumosListView, CalendarioMedicoListView, all_events1, UsuarioListView, CitasMedicoListView
+from .views import (
+    historial_list_view, export_recetario_medico,
+    atencion_view, InsumosCreateView, InsumosListView, 
+    CalendarioMedicoListView, all_events1, UsuarioListView, 
+    CitasMedicoListView, ProveedorCreateView, crear_insumo
+    )
 from django.contrib.auth.decorators import login_required
 
 
@@ -7,8 +12,13 @@ app_name = 'medico'
 
 urlpatterns = [
     path(
+        'registrar/proveedor/', 
+        login_required(ProveedorCreateView.as_view()),
+        name='registrar_proveedor'
+    ),
+    path(
         'crear/insumos/', 
-        login_required(InsumosCreateView.as_view()),
+        login_required(crear_insumo),
         name='crear_insumos'
     ),
     path(

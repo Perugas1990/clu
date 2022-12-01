@@ -3,11 +3,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http.response import Http404, HttpResponse
 from django.contrib.auth.decorators import permission_required
 from django.urls import reverse_lazy, reverse
-from .models import Insumos
+from .models import Insumos, Proveedor, Producto
 from django.db.models import Q
 from apps.citas.models import Agenda
 from apps.cliente.models import Usuario, Atencion, Historial, Estomatogmatico, SignosVitales, Odontograma
-from .forms import AtencionForm, EstomatogmaticoForm, SignosForm, OdontogramaForm
+from .forms import AtencionForm, EstomatogmaticoForm, SignosForm, OdontogramaForm, ProductoForm
 from .parsers import export_reporte_hoja_calculo
 from .constantes import FORMATOS_ARCHIVOS
 from django.views.generic import (
@@ -21,11 +21,65 @@ from django.http import HttpResponse, JsonResponse
 import json
 
 # Create your views here.
+
+class ProveedorCreateView(CreateView):
+    model = Proveedor
+    template_name = 'registrar_proveedor.html'
+    fields = [
+        'identificacion', 
+        'nombre', 
+        'apellido',
+        'telefono',
+        'direccion',
+        'correo'
+        ]
+
+    success_url = reverse_lazy('medico:registrar_proveedor')
+
 class InsumosCreateView(CreateView):
     model = Insumos 
     template_name = 'crear_insumo.html'
     fields = ['nombre', 'detalle', 'stock']
     success_url = reverse_lazy('medico:agregar_insumos')
+
+def crear_insumo(request):
+    template_name = 'crear_insumo.html'
+    producto=ProductoForm(request.POST or None)
+    context = {
+        'producto':producto
+    }
+    if request.method == 'POST':
+        if producto.is_valid():
+            nombre = producto.cleaned_data.get('nombre')
+            precio = producto.cleaned_data.get('precio')
+            cantidad = producto.cleaned_data.get('cantidad')
+            id_proveedor = producto.cleaned_data.get('id_proveedor')
+            total = precio*cantidad
+
+            producto_obj = Producto.objects.create(
+                nombre = nombre,
+                precio = precio,
+                cantidad = cantidad,
+                total = total,
+                id_proveedor = id_proveedor,                        
+                )
+            try:
+                insumo = Insumos.objects.get(id_producto=producto_obj.id)
+            except:
+                producto_id=Producto.objects.get(id=producto_obj.id)
+                Insumos.objects.create(
+                    id_producto=producto_id,
+                    cantidad=cantidad,
+                )
+            
+            #producto.save()
+            
+            return redirect('cliente:editar_cliente', request.user.id)
+
+
+
+    return render(request, template_name, context)
+    
 
 class InsumosListView(ListView):
     model = Insumos

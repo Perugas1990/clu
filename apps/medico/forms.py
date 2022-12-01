@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.admin import widgets
 
 from apps.cliente.models import Usuario, Atencion, Historial, Estomatogmatico, SignosVitales, Odontograma, PlanesDiagnostico
+from .models import Producto
 from datetime import datetime, date
 
 
@@ -66,4 +67,18 @@ class OdontogramaForm(forms.ModelForm):
             'detalle',    
         ]
 
+class ProductoForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super(ProductoForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if not isinstance(field, forms.BooleanField):
+                field.widget.attrs['class'] = 'form-control'
+    class Meta:
+        model = Producto
+        fields = [
+            'nombre', 
+            'precio',  
+            'cantidad',
+            'id_proveedor'
+        ]
